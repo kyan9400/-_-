@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offers Management</title>
+    <!-- Link to the CSS file -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Offers List</h1>
+        <ul id="offers"></ul>
+    </div>
+
+    <script>
+        // Fetch data from the API
+        fetch('http://127.0.0.1/offers_api.php')
+            .then(response => response.json())
+            .then(data => {
+                const offersList = document.getElementById('offers');
+                data.forEach(offer => {
+                    const li = document.createElement('li');
+                    li.textContent = `${offer.offer_name} - ${offer.email} - ${offer.phone}`;
+                    offersList.appendChild(li);
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    </script>
+</body>
+</html>
